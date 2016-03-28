@@ -49,7 +49,7 @@ proc LoadVideo {id} {
   fconfigure $pipe -blocking 0 -buffering line
   fileevent $pipe readable [list Read $pipe]
   
-  variable mplayer $pipe
+  set mplayer $pipe
   puts $mplayer "mute 1"
   puts $mplayer "get_time_length"
   puts $mplayer "seek 0.0 2"
@@ -62,14 +62,13 @@ proc SetVideo {mode} {
   global en_second
 
   if {$mode == "st"} {
-    puts $mplayer "mute 1"
     puts $mplayer "seek $st_second 2"
-    puts $mplayer "pause"
   } else {
-    puts $mplayer "mute 1"
     puts $mplayer "seek $en_second 2"
-    puts $mplayer "pause"
   }
+  
+  puts $mplayer "mute 1"
+  puts $mplayer "pause"
 }
 
 proc CutVideo {} {
