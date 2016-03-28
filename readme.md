@@ -1,5 +1,11 @@
 # TkVideoCut
 
+#### Run
+
+```tcl
+bash <(curl -s https://raw.githubusercontent.com/nickbarth/TkVideoCut/master/main.tcl)
+```
+
 #### Server Setup
 sudo apt-get install -y xorg
 
