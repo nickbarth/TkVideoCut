@@ -85,8 +85,6 @@ proc Exit {} {
 }
 
 proc Main {} {
-  global env
-
   wm title . "TKVideoCut"
   wm protocol . WM_DELETE_WINDOW [list Exit]
   wm resizable . 0 0
