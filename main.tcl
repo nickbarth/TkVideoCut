@@ -69,7 +69,7 @@ proc SetVideo {mode} {
 
 proc CutVideo {} {
   global video_file en_second st_second
-  tk_messageBox -message "The video is processing..." -type info
+  tk_messageBox -message "The video is processing..." -type ok
   puts "ffmpeg -i \"$video_file\" -ss $st_second -t [expr $en_second - $st_second] \"$video_file.cut.mp4\""
   exec ffmpeg -i "$video_file" -ss $st_second -t [expr $en_second - $st_second] "$video_file.cut.mp4"
   tk_messageBox -message "The video cut was successful." -type ok
