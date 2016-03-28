@@ -47,7 +47,7 @@ proc LoadVideo {id} {
   fconfigure $pipe -blocking 0 -buffering line
   fileevent $pipe readable [list Read $pipe]
   variable mplayer $pipe
-  # puts $mplayer "mute 1"
+  puts $mplayer "mute 1"
   puts $mplayer "get_time_length"
   puts $mplayer "seek 0.0 2"
   puts $mplayer "pause"
