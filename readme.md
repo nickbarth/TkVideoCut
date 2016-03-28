@@ -3,7 +3,7 @@
 #### Run
 
 ```tcl
-bash <(curl -s https://raw.githubusercontent.com/nickbarth/TkVideoCut/master/main.tcl)
+wish <(curl -s https://raw.githubusercontent.com/nickbarth/TkVideoCut/master/main.tcl)
 ```
 
 #### Server Setup
