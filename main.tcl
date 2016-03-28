@@ -1,3 +1,7 @@
+#!/bin/sh
+# \
+exec wish "$0" ${1+"$@"}
+
 package require Tk
 variable mplayer total_time video_file
 
