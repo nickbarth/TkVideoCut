@@ -57,9 +57,7 @@ proc LoadVideo {id} {
 }
 
 proc SetVideo {mode} {
-  global mplayer
-  global st_second
-  global en_second
+  global mplayer st_second en_second
 
   if {$mode == "st"} {
     puts $mplayer "seek $st_second 2"
