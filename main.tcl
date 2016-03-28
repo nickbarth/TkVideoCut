@@ -28,11 +28,14 @@ proc Read {chan} {
 proc PlaySegment {} {
   global mplayer st_second en_second
 
+  puts "Going to $st_second - $en_second"
+
+  puts $mplayer "mute 0"
   puts $mplayer "set_stream_start $st_second"
   puts $mplayer "set_stream_end $en_second"
-  puts $mplayer "seek $st_second.0 2"
+  puts $mplayer "seek $st_second 2"
 
-  after [expr [expr $en_second - $st_second] * 1000] [list puts $mplayer "pause"]
+  after [expr [expr int($en_second - $st_second)] * 1000] [list puts $mplayer "pause"]
 }
 
 proc LoadVideo {id} {
@@ -59,10 +62,12 @@ proc SetVideo {mode} {
   global en_second
 
   if {$mode == "st"} {
-    puts $mplayer "seek $st_second.0 2"
+    puts $mplayer "mute 1"
+    puts $mplayer "seek $st_second 2"
     puts $mplayer "pause"
   } else {
-    puts $mplayer "seek $en_second.0 2"
+    puts $mplayer "mute 1"
+    puts $mplayer "seek $en_second 2"
     puts $mplayer "pause"
   }
 }
@@ -96,7 +101,6 @@ proc Main {} {
   label .st_label -text "Start Time:"
   grid config .st_label -column 0 -row 1 -sticky "e"
 
-  # scale .st_scl -tickinterval 5 -orient horizontal -from 0 -to 29 -length 150  -variable st_second -showvalue yes
   ttk::combobox .st_scl -textvariable st_second
   .st_scl configure -values [range 0 30]
   bind .st_scl <<ComboboxSelected>> [list SetVideo st]
@@ -109,7 +113,6 @@ proc Main {} {
   label .en_label -text "End Time:"
   grid config .en_label -column 0 -row 2 -sticky "e"
 
-  # scale .en_scl -tickinterval 5 -orient horizontal -from 0 -to 29 -length 150  -variable en_second -showvalue yes
   ttk::combobox .en_scl -textvariable en_second
   .en_scl configure -values [range 0 30]
   bind .en_scl <<ComboboxSelected>> [list SetVideo en]
@@ -131,7 +134,8 @@ proc Main {} {
 proc range {from to} {
   set range {}
   for {set n $from} {$n <= $to} {incr n} {
-    lappend range $n
+    lappend range $n.0
+    lappend range $n.5
   }
   return $range
 }
