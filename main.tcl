@@ -91,7 +91,7 @@ proc Main {} {
   . configure -padx 4 -pady 4
   wm attributes . -topmost 0
 
-  frame .video -relief groove -borderwidth 2
+  frame .video -container yes
   grid config .video -column 0 -row 0 -columnspan 3 -sticky "news"
   set id [winfo id .video]
 
