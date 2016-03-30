@@ -92,38 +92,34 @@ proc Main {} {
   wm attributes . -topmost 0
 
   frame .video -container yes -height 400 -width 500
-  grid config .video -column 0 -row 0 -columnspan 3 -sticky "news"
+  grid config .video -column 0 -row 0 -columnspan 2 -sticky "news"
   set id [winfo id .video]
 
   label .st_label -text "Start Time:"
-  grid config .st_label -column 0 -row 1 -sticky "e"
+  grid config .st_label -column 0 -row 1 -sticky "w"
 
   ttk::combobox .st_scl -textvariable st_second
   .st_scl configure -values [range 0 30]
   bind .st_scl <<ComboboxSelected>> [list SetVideo st]
-  grid config .st_scl -column 1 -row 1 -sticky "e"
+  bind .st_scl <ButtonRelease-1> [list SetVideo st]
+  grid config .st_scl -column 0 -row 2 -sticky "news"
   set ::st_second 0
 
-  button .st_b -text "Preview" -command [list SetVideo st]
-  grid config .st_b -column 2 -row 1 -sticky "e"
-
   label .en_label -text "End Time:"
-  grid config .en_label -column 0 -row 2 -sticky "e"
+  grid config .en_label -column 1 -row 1 -sticky "w"
 
   ttk::combobox .en_scl -textvariable en_second
   .en_scl configure -values [range 0 30]
   bind .en_scl <<ComboboxSelected>> [list SetVideo en]
-  grid config .en_scl -column 1 -row 2 -sticky "e"
+  bind .en_scl <ButtonRelease-1> [list SetVideo en]
+  grid config .en_scl -column 1 -row 2 -sticky "news"
   set ::en_second 0
-
-  button .en_b -text "Preview" -command [list SetVideo en]
-  grid config .en_b -column 2 -row 2 -sticky "e"
 
   button .play_b -text "Play" -command [list PlaySegment]
   grid config .play_b -column 0 -row 3 -sticky "news"
 
   button .cut_b -text "Cut" -command [list CutVideo]
-  grid config .cut_b -column 1 -row 3 -columnspan 2 -sticky "news"
+  grid config .cut_b -column 1 -row 3 -sticky "news"
 
   LoadVideo $id
 }
