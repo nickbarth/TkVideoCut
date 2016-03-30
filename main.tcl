@@ -15,6 +15,7 @@ proc Read {chan} {
       set total_time $value
       ::.st_scl configure -values [range 0 $value]
       ::.en_scl configure -values [range 0 $value]
+      set ::en_second $value
     }
 
     puts $line
